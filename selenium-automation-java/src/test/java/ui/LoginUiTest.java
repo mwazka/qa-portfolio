@@ -15,7 +15,7 @@ import java.time.Duration;
 
 import static org.testng.Assert.assertTrue;
 
-public class DemoQaLoginTest {
+public class LoginUiTest {
 
     WebDriver driver;
     LoginPage loginPage;
@@ -23,6 +23,7 @@ public class DemoQaLoginTest {
 
     @BeforeClass
     public void setUp() {
+
         // Konfiguracja i uruchomienie sterownika Chrome
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -34,8 +35,9 @@ public class DemoQaLoginTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // maksymalnie 10 sekund
     }
 
-    @Test
+    @Test(description = "Test logowania z prawidłowymi danymi")
     public void testValidLogin() {
+
         // Przejście do strony logowania
         loginPage.goToLoginPage();
 
@@ -49,8 +51,9 @@ public class DemoQaLoginTest {
         assertTrue(driver.getCurrentUrl().contains("profile"));
     }
 
-    @Test
+    @Test(description = "Test logowania z nieprawidłowymi danymi")
     public void testInvalidLogin() {
+
         // Przejście do strony logowania
         loginPage.goToLoginPage();
 
@@ -67,8 +70,9 @@ public class DemoQaLoginTest {
         assertTrue(errorText.contains("Invalid username or password!"));
     }
 
-    @Test
+    @Test(description = "Test logowania z prawidłowymi i nieprawidłowymi danymi")
     public void testValidAndInvalidLogin() {
+
         // Przejście do strony logowania
         loginPage.goToLoginPage();
 
