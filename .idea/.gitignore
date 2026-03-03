@@ -1,29 +1,31 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-# Environment-dependent path to Maven home directory
-/mavenHomeManager.xml
-
-# Operating System files
+############################
+# OS FILES
+############################
+.DS_Store
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
-.DS_Store
 
-# IDE - IntelliJ IDEA
-/.idea/
+############################
+# INTELLIJ IDEA
+############################
+.idea/
 *.iml
 *.iws
-workspace.xml
-shelf/
-mavenHomeManager.xml
+*.ipr
+.idea_modules/
+out/
 
-# IDE - Others
+############################
+# OTHER IDEs
+############################
 .vscode/
 *.code-workspace
 
-# Java / compiled files
+############################
+# JAVA / JVM
+############################
 *.class
 *.jar
 *.war
@@ -31,55 +33,77 @@ mavenHomeManager.xml
 *.nar
 hs_err_pid*
 replay_pid*
-*.log
 
-# Maven
+############################
+# MAVEN
+############################
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
-# Build / package manager folders
+############################
+# TEST REPORTS / COVERAGE
+############################
+surefire-reports/
+failsafe-reports/
+jacoco.exec
+coverage/
+
+############################
+# ALLURE (BARDZO WAŻNE)
+############################
+allure-results/
+allure-report/
+
+############################
+# LOGS
+############################
+logs/
+*.log
+
+############################
+# BUILD DIRECTORIES
+############################
 /build/
 /dist/
-/out/
+
+############################
+# NODE (jeśli kiedyś użyjesz np. do reportów)
+############################
 /node_modules/
 /bower_components/
+package-lock.json
+yarn.lock
 
-# Eclipse project files
-.classpath
-.project
-.settings/
-
-# Encrypted / key / environment files
+############################
+# ENV / SECRETS
+############################
+.env
+.env.*
+*.properties.local
 *.jks
 *.keystore
 *.p12
 *.pem
 *.pfx
-.env
-.env.*
 
-# Temporary / backup files
+############################
+# TEMP FILES
+############################
 *.tmp
 *.temp
 *.bak
 *~
 .~*
-
-# Lockfiles
-package-lock.json
-yarn.lock
-
-# Logs
-logs/
-*.log
-
-# IntelliJ coverage / test reports
-coverage/
-jacoco.exec
-surefire-reports/
-failsafe-reports/
-
-# OS and other
-.idea_modules/
-.vagrant/
 *.swp
+
+############################
+# ECLIPSE
+############################
+.classpath
+.project
+.settings/
+
+############################
+# VAGRANT
+############################
+.vagrant/
