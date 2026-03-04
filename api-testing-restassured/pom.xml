@@ -57,6 +57,13 @@
             <version>2.24.0</version>
         </dependency>
 
+        <!-- Password generator -->
+        <dependency>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -11,8 +11,10 @@ public class LoginResponse {
     private String username;
     private String token;
     private String expires;
+    private String status;
+    private String result;
     private String message;
-
+    private int statusCode;
     public LoginResponse() {}
 
     public String getUserId() {
@@ -31,7 +33,23 @@ public class LoginResponse {
         return expires;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
     public String getMessage() {
         return message;
+    }
+
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
     }
 }
