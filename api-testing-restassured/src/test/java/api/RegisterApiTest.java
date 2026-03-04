@@ -19,7 +19,7 @@ public class RegisterApiTest extends BaseTest {
                 ConfigManager.getFirstName(),
                 ConfigManager.getLastName()
         );
-        RegisterResponse response = given()
+        io.restassured.response.Response rawResponse = given()
                 .log().all()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
@@ -28,12 +28,69 @@ public class RegisterApiTest extends BaseTest {
                 .post("/Account/v1/User")
                 .then()
                 .log().all()
-                .statusCode(201)
                 .extract()
-                .as(RegisterResponse.class);
+                .response();
+        RegisterResponse response = rawResponse.as(RegisterResponse.class);
+        response.setStatusCode(rawResponse.getStatusCode());
+        assertEquals(response.getStatusCode(), 201, "Created");
         assertEquals(response.getUsername(), ConfigManager.getUserName(), "Username is matching");
         assertNotNull(response.getBooks(), "Empty array");
         assertNotNull(response.getUserID(), "Created userID");
-        userIDToDelete = response.getUserID();
+    }
+
+//    @Test(description = "already created user")
+    public void testAlreadyCreatedUser() {
+        RegisterRequest request = new RegisterRequest(
+                ConfigManager.getUserName(),
+                ConfigManager.getPassword(),
+                ConfigManager.getFirstName(),
+                ConfigManager.getLastName()
+        );
+        io.restassured.response.Response rawResponse = given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(request)
+                .when()
+                .post("/Account/v1/User")
+                .then()
+                .log().all()
+                .extract()
+                .response();
+        RegisterResponse response = rawResponse.as(RegisterResponse.class);
+        response.setStatusCode(rawResponse.getStatusCode());
+        assertEquals(response.getStatusCode(), 406, "Not Acceptable");
+        assertNotNull(response.getCode(), "Created code");
+//        assertEquals(response.getCode(), "1204");
+        assertEquals(response.getMessage(), "User exists!");
+        userIDToDelete = response.getUserID(); // not working
+    }
+
+    @Test(description = "Verify that registration fails when an invalid password is provided")
+    public void testInvalidRegister() {
+        RegisterRequest request = new RegisterRequest(
+                ConfigManager.getUserName(),
+                ConfigManager.getRandomPassword(),
+                ConfigManager.getFirstName(),
+                ConfigManager.getLastName()
+        );
+        io.restassured.response.Response rawResponse = given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(request)
+                .when()
+                .post("/Account/v1/User")
+                .then()
+                .log().all()
+                .extract()
+                .response();
+        RegisterResponse response = rawResponse.as(RegisterResponse.class);
+        response.setStatusCode(rawResponse.getStatusCode());
+        assertEquals(response.getStatusCode(), 400, "Bad Request");
+        assertEquals(response.getMessage(), "Passwords must have at least one non alphanumeric character, one digit ('0'-'9'), one uppercase ('A'-'Z'), one lowercase ('a'-'z'), one special character and Password must be eight characters or longer.");
+//        assertEquals(response.getCode(), "1300");
+        assertNotNull(response.getCode(), "Created code");
+        userIDToDelete = response.getUserID(); // not working
     }
 }
