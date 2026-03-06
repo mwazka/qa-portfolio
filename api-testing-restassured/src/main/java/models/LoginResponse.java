@@ -11,9 +11,9 @@ public class LoginResponse {
     private String username;
     private String token;
     private String expires;
-    private String status;
     private String result;
     private String message;
+    private String status;
     private int statusCode;
     public LoginResponse() {}
 
@@ -33,10 +33,6 @@ public class LoginResponse {
         return expires;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
     public String getResult() {
         return result;
     }
@@ -45,11 +41,16 @@ public class LoginResponse {
         return message;
     }
 
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
+    public String getStatus() {
+        return status;
     }
 
     public int getStatusCode() {
         return statusCode;
     }
+
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
+    }
+
 }

@@ -5,9 +5,9 @@ import static io.restassured.RestAssured.given;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 import base.BaseTest;
+import utils.ConfigManager;
 import models.LoginRequest;
 import models.LoginResponse;
-import utils.ConfigManager;
 
 public class LoginApiTest extends BaseTest {
 
