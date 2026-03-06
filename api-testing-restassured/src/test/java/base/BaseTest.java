@@ -1,7 +1,9 @@
 package base;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.specification.ProxySpecification.auth;
+// import static io.restassured.specification.ProxySpecification.auth;
+
+import io.restassured.config.RedirectConfig;
 import io.restassured.http.ContentType;
 import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
@@ -15,6 +17,8 @@ public class BaseTest {
     protected void setup() {
         RestAssured.baseURI = ConfigManager.getBaseUrl();
         RestAssured.defaultParser = Parser.JSON;
+        RestAssured.config = RestAssured.config()
+                .redirect(RedirectConfig.redirectConfig().followRedirects(false));
     }
 
     @AfterClass

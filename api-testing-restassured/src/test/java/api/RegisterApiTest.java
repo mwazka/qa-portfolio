@@ -5,9 +5,9 @@ import static io.restassured.RestAssured.given;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 import base.BaseTest;
+import utils.ConfigManager;
 import models.RegisterRequest;
 import models.RegisterResponse;
-import utils.ConfigManager;
 
 public class RegisterApiTest extends BaseTest {
 
